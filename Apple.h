@@ -2,9 +2,10 @@
 
 
 struct Apple {
-	Apple();
+	Apple(unsigned char maxWidth, unsigned char maxHeight);
 	void randomizePosition();
-	void eaten(Playground playground);
+	void eaten();
 
+	COORD maxCoords;
 	COORD position;
-} apple;
+};

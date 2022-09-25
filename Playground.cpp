@@ -4,6 +4,9 @@
 #include "Snake.h"
 #include "Apple.h"
 
+unsigned char hWidth = 60;
+unsigned char hHeight = 15;
+
 Playground::Playground() {
 	HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleActiveScreenBuffer(hConsole);
@@ -29,6 +32,11 @@ BOOL Playground::SetSize(HANDLE screen_buffer, SHORT width, SHORT height) {
 	SMALL_RECT const window = { 0, 0, size.X - 1, size.Y - 1 };
 	success = SetConsoleWindowInfo(screen_buffer, TRUE, &window);
 	return success;
+}
+
+void Playground::setCellBackToWhite(COORD cell) {
+	DWORD coloured;
+	FillConsoleOutputAttribute(Console, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED, 1, cell, &coloured);
 }
 
 void Playground::Draw(wchar_t* map, const Snake& player, const Apple& apple) {

@@ -1,30 +1,27 @@
 #include <Windows.h>
 #include <ctime>
 
-#include "Playground.h"
 #include "Apple.h"
 
-Apple::Apple() {
+Apple::Apple(unsigned char maxWidth, unsigned char maxHeight) {
 	srand(time(NULL));
 	//short Y = rand() % (max - min + 1) + min
-	short X = rand() % ((hWidth - 1) - 1 + 1) + 1;
-	short Y = rand() % ((hHeight - 1) - 1 + 1) + 1;
+	short X = rand() % ((maxWidth - 1) - 1 + 1) + 1;
+	short Y = rand() % ((maxHeight - 1) - 1 + 1) + 1;
 
+	maxCoords = { maxWidth, maxHeight };
 	position = { X,Y };
 }
 
 void Apple::randomizePosition() {
 	srand(time(NULL));
 	//short Y = rand() % (max - min + 1) + min
-	short X = rand() % ((hWidth - 1) - 1 + 1) + 1;
-	short Y = rand() % ((hHeight - 1) - 1 + 1) + 1;
+	short X = rand() % ((maxCoords.X - 1) - 1 + 1) + 1;
+	short Y = rand() % ((maxCoords.Y - 1) - 1 + 1) + 1;
 
 	position = { X,Y };
 }
 
-void Apple::eaten(Playground playground) {
-	DWORD coloured;
-	FillConsoleOutputAttribute(playground.Console, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED, 1, this->position, &coloured);
-
+void Apple::eaten() {
 	randomizePosition();
 }

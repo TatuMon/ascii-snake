@@ -3,7 +3,7 @@
 #include "Snake.h"
 #include "Playground.h"
 
-Snake::Snake(int nSize = 5) {
+Snake::Snake(int nSize) {
 	m_size = nSize;
 	m_facing = EAST;
 

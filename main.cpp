@@ -8,16 +8,11 @@
 #include "Snake.h"
 #include "Apple.h"
 
-//TO-DO/FIX
-// 1- Snake can turn on the same axis
-// 2- Snake collision with itself
-// 4- Pause button
-
 int main() {
 	CharMap map = std::make_unique<wchar_t[]>(hWidth * hHeight);
 	Playground playground;
-
 	Snake player = Snake();
+	Apple apple = Apple(hWidth, hHeight);
 
 	bool running = true;
 	bool paused = false;

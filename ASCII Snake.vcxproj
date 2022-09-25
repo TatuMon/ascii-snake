@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Apple.h" />
+    <ClInclude Include="Monstd.h" />
     <ClInclude Include="Playground.h" />
     <ClInclude Include="Snake.h" />
   </ItemGroup>
