@@ -1,5 +1,6 @@
 #include <Windows.h>
 
+#include "Monstd.h"
 #include "Playground.h"
 #include "Snake.h"
 #include "Apple.h"
@@ -20,15 +21,14 @@ Playground::Playground()
 
 void Playground::loadGameObjects()
 {
-	Snake* player = new Snake();
-	Apple* apple = new Apple(hWidth, hHeight);
-
-	this->m_snake = player;
-	this->m_apple = apple;
+	this->map = new wchar_t[hWidth * hHeight];
+	this->m_snake = new Snake();
+	this->m_apple = new Apple(hWidth, hHeight);
 }
 
 void Playground::unloadGameObjects()
 {
+	delete this->map;
 	delete this->m_snake;
 	delete this->m_apple;
 }
@@ -59,7 +59,7 @@ void Playground::setCellBackToBlack(COORD cell)
 	FillConsoleOutputAttribute(Console, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED, 1, cell, &coloured);
 }
 
-void Playground::Draw(wchar_t* map)
+void Playground::Draw()
 {
 	for (int x = 0; x < hWidth; x++)
 	{
@@ -67,24 +67,24 @@ void Playground::Draw(wchar_t* map)
 		{
 			if (x == this->m_apple->position.X && y == this->m_apple->position.Y) // Draw apple
 			{
-				map[x + (y * hWidth)] = 9608;
+				this->map[x + (y * hWidth)] = 9608;
 				DWORD coloured;
 				FillConsoleOutputAttribute(this->Console, FOREGROUND_RED, 1, this->m_apple->position, &coloured);
 			}
 			else // Draw playground empty cell
 			{ 
-				map[x + (y * hWidth)] = '.';
+				this->map[x + (y * hWidth)] = '.';
 			}
 		}
 	}
 
 	for (auto body_part : this->m_snake->m_body)
 	{
-		map[body_part.X + (body_part.Y * hWidth)] = 9608; //Unicode block char
+		this->map[body_part.X + (body_part.Y * hWidth)] = 9608; //Unicode block char
 	}
 
 	DWORD written;
-	WriteConsoleOutputCharacter(this->Console, map, hWidth * hHeight, { 0, 0 }, &written);
+	WriteConsoleOutputCharacter(this->Console, this->map, hWidth * hHeight, { 0, 0 }, &written);
 }
 
 /// Se debería llamar desde otro hilo diferente al que se usa para dibujar

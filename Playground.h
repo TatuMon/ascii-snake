@@ -8,6 +8,7 @@ extern unsigned char hHeight;
 
 struct Playground {
 	HANDLE Console;
+	CharMap map;
 
 	Playground();
 
@@ -21,7 +22,7 @@ struct Playground {
 
 	void setCellBackToBlack(COORD cell);
 
-	void Draw(wchar_t* map);
+	void Draw();
 
 	void PollSnakeMovement();
 

@@ -11,7 +11,6 @@
 #include "Apple.h"
 
 int main() {
-	CharMap map = std::make_unique<wchar_t[]>(hWidth * hHeight);
 	Playground playground;
 
 	bool running = true;
@@ -25,7 +24,7 @@ int main() {
 		std::this_thread::sleep_for(Seconds(0.1f));
 		
 		playground.MoveSnake();
-		playground.Draw(map.get());
+		playground.Draw();
 	}
 
 	playground.unloadGameObjects();

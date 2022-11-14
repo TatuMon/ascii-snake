@@ -3,7 +3,7 @@
 #include <chrono>
 
 typedef std::chrono::duration<float> Seconds;
-typedef std::unique_ptr<wchar_t[]> CharMap;
+typedef wchar_t* CharMap;
 
 enum CardinalDirection {
 	NORTH,
