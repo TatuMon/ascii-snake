@@ -7,4 +7,6 @@
   1. The head passes over the snake's body
 
 - ### How to win
-  2. The body of the snake covers the whole playground
+  1. The body of the snake covers the whole playground
+
+- ### Restructure the repo
