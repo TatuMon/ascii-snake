@@ -3,6 +3,8 @@
 #include <thread>
 #include <string>
 
+#include <iostream>
+
 #include "Monstd.h"
 #include "Playground.h"
 #include "Snake.h"
@@ -11,20 +13,20 @@
 int main() {
 	CharMap map = std::make_unique<wchar_t[]>(hWidth * hHeight);
 	Playground playground;
-	Snake player = Snake();
-	Apple apple = Apple(hWidth, hHeight);
 
 	bool running = true;
 	bool paused = false;
 
 	//Read input and update snake body
-	std::thread eventsThread([&player, running] { while (running) player.PollMovementEvent(); });
+	std::thread eventsThread([&playground, running] { while (running) playground.PollSnakeMovement(); });
 
 	while (running)
 	{
 		std::this_thread::sleep_for(Seconds(0.1f));
-		playground.Draw(map.get(), player, apple);
 		
-		player.Move();
+		playground.MoveSnake();
+		playground.Draw(map.get());
 	}
+
+	playground.unloadGameObjects();
 }

@@ -19,6 +19,7 @@ Snake::Snake(int nSize) {
 /// </summary>
 void Snake::Move() {
 	iCOORD newPos;
+
 	switch (this->m_facing) {
 	case NORTH:
 	{
@@ -51,6 +52,13 @@ void Snake::Move() {
 	}
 
 	this->m_body.push_front(newPos);
+
+	if (!this->skipTailRemoval)
+	{
+		this->m_body.pop_back();
+	}
+
+	this->skipTailRemoval = false;
 }
 
 void Snake::PollMovementEvent() {

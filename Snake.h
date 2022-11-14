@@ -12,4 +12,6 @@ struct Snake {
 	int m_size;
 	std::deque<iCOORD> m_body;
 	CardinalDirection m_facing;
+
+	bool skipTailRemoval = false;
 };
